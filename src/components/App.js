@@ -10,16 +10,30 @@ const Application = styled.div`
   padding-bottom: 24px;
 `;
 
-// API_KEY = 14121213-0294698cbddd3de5cddc95af0
-// URL = https://pixabay.com/api/?q={SearchQuery}&page={page}&key={API_KEY}&image_type=photo&orientation=horizontal&per_page=12
-
 export default class App extends Component {
 
   state = {
     searchQuery: '',
     images: [],
-    page: 1
+    page: 1,
+    isLoading: false,
+    isModalOpened: false
   };
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+      window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
+  }
+
+  onSearchFormSubmit(){};
+
+  onLoadMore(){};
+
+  onModalOpened(){};
+
+  onModalClose(){};
 
   render() {
 

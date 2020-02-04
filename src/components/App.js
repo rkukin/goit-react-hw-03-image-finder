@@ -15,6 +15,12 @@ const Application = styled.div`
 
 export default class App extends Component {
 
+  state = {
+    searchQuery: '',
+    images: [],
+    page: 1
+  };
+
   render() {
 
     return(

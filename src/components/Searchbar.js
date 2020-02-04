@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -77,23 +77,49 @@ const SearchFormInput = styled.input`
 `;
 
 
+export default class Searchbar extends Component {
 
-export default function Searchbar({onSubmit})
-{
-  return (
-  <SearchBarHeader>
-    <SearchForm>
-      <SearchButton type="submit">
-        <SearchButtonLabel>Search</SearchButtonLabel>
-      </SearchButton>
+  state = {
+    searchQuery: ''
+  };
 
-      <SearchFormInput
-        type="text"
-        autoComplete="off"
-        autoFocus
-        placeholder="Search images and photos"
-      />
-    </SearchForm>
-  </SearchBarHeader>
-)
+  onChange = e => {
+    const {name, value} = e.target;
+
+    this.setState({[name]: value})
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+
+    this.props.onFormSubmit(this.state.searchQuery);
+    console.log("Submitted!");
+    this.setState({searchQuery: ''});
+  };
+
+  render() {
+    return (
+      <SearchBarHeader>
+        <SearchForm onSubmit={this.onSubmit}>
+          <SearchButton type="submit">
+            <SearchButtonLabel>Search</SearchButtonLabel>
+          </SearchButton>
+
+          <SearchFormInput
+            type="text"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+            name ="searchQuery"
+            value={this.state.searchQuery}
+            onChange = {this.onChange}
+          />
+        </SearchForm>
+      </SearchBarHeader>
+    )
+  }
 }
+
+Searchbar.propType = {
+  onFormSubmit: PropTypes.func.isRequired
+};

@@ -29,9 +29,12 @@ const LoadMore = styled.button`
   }
 `;
 
-export default function Button()
-{
+export default function Button({onLoadMore}) {
   return (
-    <LoadMore>Load More</LoadMore>
+    <LoadMore type="button" className="Button" onClick={onLoadMore}>
+      Load more...
+    </LoadMore>
   )
 }
+
+Button.propTypes = PropTypes.func.isRequired;

@@ -14,7 +14,9 @@ export default class App extends Component {
 
   state = {
     searchQuery: '',
-    images: [],
+    images: [
+      // {id, webformatURL, previewURL}
+      ],
     page: 1,
     isLoading: false,
     isModalOpened: false
@@ -27,7 +29,13 @@ export default class App extends Component {
     });
   }
 
-  onSearchFormSubmit(){};
+  onSearchFormSubmit(query){
+    this.setState({
+      images: [],
+      searchQuery: query,
+      page: 1,
+    });
+  };
 
   onLoadMore(){};
 
@@ -39,7 +47,7 @@ export default class App extends Component {
 
     return(
       <Application>
-        <Searchbar/>
+        <Searchbar onFormSubmit = {this.onSearchFormSubmit}/>
       </Application>
     )
   }

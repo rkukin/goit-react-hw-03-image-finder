@@ -2,7 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const ImageGallery = styled.ul`
+import ImageGalleryItem from "./ImageGalleryItem";
+
+const ImageGrid = styled.ul`
   display: grid;
   max-width: calc(100vw - 48px);
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -15,11 +17,14 @@ const ImageGallery = styled.ul`
   margin-right: auto;
 `;
 
-export default function ImageGallery()
+export default function ImageGallery({images})
 {
   return (
-    <ImageGallery>
-      <!-- Набор <li> с изображениями -->
-    </ImageGallery>
+    <ImageGrid>
+      <ImageGalleryItem images={images} />
+    </ImageGrid>
   )
 }
+
+ImageGallery.propType = PropTypes.arrayOf(
+);

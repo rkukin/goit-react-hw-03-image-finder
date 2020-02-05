@@ -17,13 +17,15 @@ const ImageGrid = styled.ul`
   margin-right: auto;
 `;
 
-export default function ImageGallery({images}) {
+export default function ImageGallery({images, onImageClick}) {
   return (
     <ImageGrid>
-      <ImageGalleryItem images={images}/>
+      <ImageGalleryItem onImageClick={onImageClick} images={images}/>
     </ImageGrid>
   )
 }
 
-ImageGallery.propType = PropTypes.arrayOf(
-);
+ImageGallery.propTypes = {
+  onImageClick: PropTypes.func.isRequired,
+  images: PropTypes.array.isRequired
+};

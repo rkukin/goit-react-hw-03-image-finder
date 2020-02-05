@@ -19,14 +19,26 @@ const Image = styled.img`
   }
 `;
 
-export default function ImageGalleryItem({images}) {
+export default function ImageGalleryItem({images, onImageClick}) {
   return (
     <>
-      {images.map(({id, webformatURL}) => (
+      {images.map(({id, previewURL, webformatURL}) => (
         <ImageGalleryItm key={id}>
-          <Image src={webformatURL} alt=""/>
+          <Image onClick={() => {
+            onImageClick(webformatURL);
+          }} src={previewURL} alt=""/>
         </ImageGalleryItm>
       ))}
     </>
   )
 }
+
+ImageGalleryItem.propTypes = {
+  onImageClick: PropTypes.func.isRequired,
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    webformatURL: PropTypes.string.isRequired,
+    previewURL: PropTypes.string.isRequired
+  }).isRequired)
+};

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -20,14 +20,34 @@ const ModalWindow = styled.div`
   max-height: calc(100vh - 24px);
 `;
 
-export default function Modal({imageURL})
-{
+export default class Modal extends Component {
 
-  return (
-    <Overlay >
-      <ModalWindow className="Modal">
-        <img src={imageURL} alt="" />
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+  }
+
+  handleKeyDown = e => {
+    if (e.code === 'Escape') {
+      this.props.onModalClose();
+    }
+  };
+
+  render() {
+    const {onModalClose, imageURL} = this.props;
+
+    return <Overlay onClick={onModalClose}>
+      <ModalWindow>
+        <img src={imageURL} alt=""/>
       </ModalWindow>
     </Overlay>
-  )
+  }
 }
+
+Modal.propTypes = {
+  onModalClose: PropTypes.func.isRequired,
+  imageURL: PropTypes.string.isRequired
+};

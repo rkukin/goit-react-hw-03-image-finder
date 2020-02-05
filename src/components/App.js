@@ -5,6 +5,7 @@ import Searchbar from "./Searchbar";
 import ImageGallery from "./ImageGallery";
 import Loader from "./Loader";
 import Modal from "./Modal";
+import Button from "./Button";
 
 import getImagesAPI from "../api/getImages"
 
@@ -27,10 +28,12 @@ export default class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth',
-    });
+    if (prevState.imgURL === this.state.imgURL){
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
 
     const prevSearchQuery = prevState.searchQuery;
     const currentSearchQuery = this.state.searchQuery;
@@ -38,7 +41,7 @@ export default class App extends Component {
     if (prevSearchQuery !== currentSearchQuery) {
       this.fetchImages();
     }
-  }
+  };
 
   onSearchFormSubmit = (query) => {
     this.setState({
@@ -48,10 +51,16 @@ export default class App extends Component {
     });
   };
 
-  onModalOpened = (imageURL) => {
+  onImageClick = (imageURL) => {
+    this.setState({
+      imgURL: imageURL
+    })
   };
 
   onModalClose = () => {
+    this.setState({
+      imgURL: null
+    })
   };
 
   fetchImages = () => {
@@ -77,17 +86,13 @@ export default class App extends Component {
     return (
       <Application>
         <Searchbar onFormSubmit={this.onSearchFormSubmit}/>
-
         {error && (<p>{`Whoops, something went wrong: ${error.message}`}</p>)}
-
-        {images.length > 0 && <ImageGallery images={images}/>}
+        {images.length > 0 && <ImageGallery onImageClick={this.onImageClick} images={images}/>}
         {isLoading && <Loader/>}
         {images.length > 0 && !isLoading && (
-          <button type="button" onClick={this.fetchImages}>
-            Load more
-          </button>
+          <Button onLoadMore={this.fetchImages}/>
         )}
-        {imgURL && <Modal imageURL={imgURL}/>}
+        {imgURL && <Modal imageURL={imgURL} onModalClose={this.onModalClose}/>}
       </Application>
     )
   }

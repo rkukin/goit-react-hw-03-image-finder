@@ -109,9 +109,9 @@ export default class Searchbar extends Component {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            name ="searchQuery"
+            name="searchQuery"
             value={this.state.searchQuery}
-            onChange = {this.onChange}
+            onChange={this.onChange}
           />
         </SearchForm>
       </SearchBarHeader>

@@ -19,15 +19,14 @@ const Image = styled.img`
   }
 `;
 
-export default function ImageGalleryItem({images})
-{
+export default function ImageGalleryItem({images}) {
   return (
-      <>
-        {images.map(({ id, webformatURL }) => (
-          <ImageGalleryItm key={id}>
-            <Image src={webformatURL} alt=""/>
-          </ImageGalleryItm>
-        ))}
-      </>
+    <>
+      {images.map(({id, webformatURL}) => (
+        <ImageGalleryItm key={id}>
+          <Image src={webformatURL} alt=""/>
+        </ImageGalleryItm>
+      ))}
+    </>
   )
 }

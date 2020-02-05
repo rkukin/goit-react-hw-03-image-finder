@@ -20,12 +20,13 @@ const ModalWindow = styled.div`
   max-height: calc(100vh - 24px);
 `;
 
-export default function Modal()
+export default function Modal({imageURL})
 {
+
   return (
     <Overlay >
       <ModalWindow className="Modal">
-        <img src="" alt="" />
+        <img src={imageURL} alt="" />
       </ModalWindow>
     </Overlay>
   )

@@ -17,11 +17,10 @@ const ImageGrid = styled.ul`
   margin-right: auto;
 `;
 
-export default function ImageGallery({images})
-{
+export default function ImageGallery({images}) {
   return (
     <ImageGrid>
-      <ImageGalleryItem images={images} />
+      <ImageGalleryItem images={images}/>
     </ImageGrid>
   )
 }

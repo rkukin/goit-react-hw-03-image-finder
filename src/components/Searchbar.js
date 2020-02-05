@@ -93,7 +93,6 @@ export default class Searchbar extends Component {
     e.preventDefault();
 
     this.props.onFormSubmit(this.state.searchQuery);
-    console.log("Submitted!");
     this.setState({searchQuery: ''});
   };
 

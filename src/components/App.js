@@ -28,7 +28,7 @@ export default class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevState.imgURL === this.state.imgURL){
+    if (prevState.images.length !== this.state.images.length){
       window.scrollTo({
         top: document.documentElement.scrollHeight,
         behavior: 'smooth',
@@ -86,7 +86,7 @@ export default class App extends Component {
     return (
       <Application>
         <Searchbar onFormSubmit={this.onSearchFormSubmit}/>
-        {error && (<p>{`Whoops, something went wrong: ${error.message}`}</p>)}
+        {error && <p>Whoops, something went wrong: {error.message}</p>}
         {images.length > 0 && <ImageGallery onImageClick={this.onImageClick} images={images}/>}
         {isLoading && <Loader/>}
         {images.length > 0 && !isLoading && (

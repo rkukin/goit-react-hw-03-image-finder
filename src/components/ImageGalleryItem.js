@@ -22,11 +22,11 @@ const Image = styled.img`
 export default function ImageGalleryItem({images, onImageClick}) {
   return (
     <>
-      {images.map(({id, previewURL, webformatURL}) => (
+      {images.map(({id, webformatURL, largeImageURL}) => (
         <ImageGalleryItm key={id}>
           <Image onClick={() => {
-            onImageClick(webformatURL);
-          }} src={previewURL} alt=""/>
+            onImageClick(largeImageURL);
+          }} src={webformatURL} alt=""/>
         </ImageGalleryItm>
       ))}
     </>
@@ -39,6 +39,6 @@ ImageGalleryItem.propTypes = {
     PropTypes.shape({
     id: PropTypes.number.isRequired,
     webformatURL: PropTypes.string.isRequired,
-    previewURL: PropTypes.string.isRequired
+      largeImageURL: PropTypes.string.isRequired
   }).isRequired)
 };
